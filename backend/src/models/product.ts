@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { ERROR } from '../constants';
 
 interface IProduct {
   title: string;
@@ -14,24 +15,24 @@ interface IProduct {
 const productSchema = new mongoose.Schema<IProduct>({
   title: {
     type: String,
-    minlength: 2,
-    maxlength: 30,
-    required: true,
     unique: true,
+    required: [true, ERROR.REQUIRED_FIELD.replace('%f%', 'title')],
+    minlength: [2, ERROR.PRODUCT_TITLE_MIN_LENGTH],
+    maxlength: [30, ERROR.PRODUCT_TITLE_MAX_LENGTH],
   },
   image: {
     fileName: {
       type: String,
-      required: true,
+      required: [true, ERROR.REQUIRED_FIELD.replace('%f%', 'image.fileName')],
     },
     originalName: {
       type: String,
-      required: true,
+      required: [true, ERROR.REQUIRED_FIELD.replace('%f%', 'image.originalName')],
     },
   },
   category: {
     type: String,
-    required: true,
+    required: [true, ERROR.REQUIRED_FIELD.replace('%f%', 'category')],
 
   },
   description: {
