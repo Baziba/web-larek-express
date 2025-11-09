@@ -1,11 +1,11 @@
-import { HTTP_STATUS } from '../constants';
+import HttpCodes from '../helpers/http-codes';
 
 class ConflictError extends Error {
   public statusCode: number;
 
   constructor(message: string) {
     super(message);
-    this.statusCode = HTTP_STATUS.CONFLICT;
+    this.statusCode = HttpCodes.CONFLICT;
   }
 }
 
