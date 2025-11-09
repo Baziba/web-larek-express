@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { createOrder } from '../controllers/order';
-import { createOrderValidation } from '../helpers/validation-rules';
+import { createOrderValidation } from '../helpers/validations';
 
 const router = Router();
 

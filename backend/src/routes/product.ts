@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { getProducts, createProduct, updateProduct, deleteProduct } from '../controllers/products';
-import { validateObjectId, productBodyValidation } from '../helpers/validation-rules';
+import { validateObjectId, productBodyValidation } from '../helpers/validations';
 
 const router = Router();
 
