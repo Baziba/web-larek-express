@@ -5,7 +5,8 @@ const config = {
   UPLOAD_PATH_TEMP: process.env.UPLOAD_PATH_TEMP || 'temp',
   ORIGIN_ALLOW: process.env.ORIGIN_ALLOW || 'http://localhost:5173',
   AUTH_REFRESH_TOKEN_EXPIRY: process.env.AUTH_REFRESH_TOKEN_EXPIRY || '7d',
-  AUTH_ACCESS_TOKEN_EXPIRY: process.env.AUTH_ACCESS_TOKEN_EXPIRY || '1m',
+  AUTH_ACCESS_TOKEN_EXPIRY: process.env.AUTH_ACCESS_TOKEN_EXPIRY || '10m',
+  JWT_SECRET: 'super-secret-key',
 };
 
 export default config;
