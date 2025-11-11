@@ -2,7 +2,7 @@ import { Express, Request } from 'express';
 import multer, { FileFilterCallback } from 'multer';
 import path from 'path';
 import fs from 'fs';
-import { nanoid } from 'nanoid';
+import { faker } from '@faker-js/faker';
 import config from '../config';
 import BadRequestError from '../errors/bad-request-error';
 import ErrorMessages from '../helpers/error-messages';
@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
     cb(null, temporaryPath);
   },
   filename: (_req, file, cb) => {
-    const uniqueName = `${nanoid(32)}${path.extname(file.originalname)}`;
+    const uniqueName = `${faker.string.uuid()}${path.extname(file.originalname)}`;
     cb(null, uniqueName);
   },
 });
