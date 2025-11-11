@@ -24,14 +24,45 @@ const productBodyValidation = celebrate({
   }),
 });
 
+const productUpdateBodyValidation = celebrate({
+  body: Joi.object().keys({
+    title: Joi.string().min(2).max(30),
+    image: Joi.object().keys({
+      fileName: Joi.string(),
+      originalName: Joi.string(),
+    }),
+    category: Joi.string(),
+    description: Joi.string(),
+    price: Joi.number().min(0),
+  }),
+});
+
 const validateObjectId = celebrate({
   params: Joi.object().keys({
     id: Joi.string().hex().length(24).required(),
   }),
 });
 
+const userRegistrationValidation = celebrate({
+  body: Joi.object().keys({
+    name: Joi.string().min(2).max(30).default('Ё-мое'),
+    email: Joi.string().email().required(),
+    password: Joi.string().min(6).required(),
+  }),
+});
+
+const userLoginValidation = celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().email().required(),
+    password: Joi.string().min(6).required(),
+  }),
+});
+
 export {
   createOrderValidation,
   productBodyValidation,
-  validateObjectId
+  productUpdateBodyValidation,
+  validateObjectId,
+  userLoginValidation,
+  userRegistrationValidation,
 };

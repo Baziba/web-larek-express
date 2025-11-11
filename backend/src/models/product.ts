@@ -1,5 +1,8 @@
 import mongoose from 'mongoose';
+import fs from 'fs';
+import path from 'path';
 import ErrorMessages from '../helpers/error-messages';
+import { errorLogger } from '../middlewares/logger';
 
 interface IProduct {
   title: string;
@@ -42,6 +45,20 @@ const productSchema = new mongoose.Schema<IProduct>({
     type: Number,
     default: null,
   },
+});
+
+productSchema.post('findOneAndDelete', async (product) => {
+  if (product && product.image && product.image.fileName) {
+    const imagePath = path.join(__dirname, '..', 'public', product.image.fileName);
+
+    fs.unlink(imagePath, (err) => {
+      if (err) {
+        errorLogger.error(`Ошибка при удалении файла изображения: ${err}`);
+      } else {
+        errorLogger.error(`Файл изображения успешно удален: ${imagePath}`);
+      }
+    });
+  }
 });
 
 export default mongoose.model<IProduct>('product', productSchema);
